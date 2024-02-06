@@ -6,7 +6,7 @@ namespace RaceTo21
 {
     public class Deck
     {
-        List<string> cards = new List<string>();
+        List<Card> cards = new List<Card>();
 
         public Deck()
         {
@@ -18,25 +18,50 @@ namespace RaceTo21
                 foreach (string cardSuit in suits)
                 {
                     string cardName;
+                    string cardLongName;
+
                     switch (cardVal)
                     {
                         case 1:
                             cardName = "A";
+                            cardLongName = "Ace of ";
                             break;
                         case 11:
                             cardName = "J";
+                            cardLongName = "Jack of ";
                             break;
                         case 12:
                             cardName = "Q";
+                            cardLongName = "Queen of ";
                             break;
                         case 13:
                             cardName = "K";
+                            cardLongName = "King of ";
                             break;
                         default:
                             cardName = cardVal.ToString();
+                            cardLongName = cardVal.ToString() + " of ";
                             break;
                     }
-                    cards.Add(cardName + cardSuit);
+
+                    if (cardSuit == "S")
+                    {
+                        cardLongName += "Spades";
+                    }
+                    else if (cardSuit == "H")
+                    {
+                        cardLongName += "Hearts";
+                    }
+                    else if (cardSuit == "C")
+                    {
+                        cardLongName += "Clubs";
+                    }
+                    else if (cardSuit == "D")
+                    {
+                        cardLongName += "Diamonds";
+                    };
+
+                    cards.Add(new Card { ID = cardName + cardSuit, name = cardLongName });
                 }
             }
         }
@@ -54,7 +79,7 @@ namespace RaceTo21
             // (this should be easier to understand)
             for (int i=0; i<cards.Count; i++)
             {
-                string tmp = cards[i];
+                Card tmp = cards[i];
                 int swapindex = rng.Next(cards.Count);
                 cards[i] = cards[swapindex];
                 cards[swapindex] = tmp;
@@ -71,7 +96,7 @@ namespace RaceTo21
         {
             for (int i=0; i<cards.Count; i++)
             {
-                Console.Write(i+":"+cards[i]); // a list property can look like an Array!
+                Console.Write(i+":"+cards[i].ID); // a list property can look like an Array!
                 if (i < cards.Count -1)
                 {
                     Console.Write(" ");
@@ -82,9 +107,9 @@ namespace RaceTo21
             }
         }
 
-        public string DealTopCard()
+        public Card DealTopCard()
         {
-            string card = cards[cards.Count - 1];
+            Card card = cards[cards.Count - 1];
             cards.RemoveAt(cards.Count - 1);
             // Console.WriteLine("I'm giving you " + card);
             return card;

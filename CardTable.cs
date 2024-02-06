@@ -86,7 +86,7 @@ namespace RaceTo21
             if (player.cards.Count > 0)
             {
                 Console.Write(player.name + " has: ");
-                foreach (string card in player.cards)
+                foreach (Card card in player.cards)
                 {
                     Console.Write(card + " ");
                 }

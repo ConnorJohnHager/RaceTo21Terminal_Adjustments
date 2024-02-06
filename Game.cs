@@ -64,7 +64,7 @@ namespace RaceTo21
                 {
                     if (cardTable.OfferACard(player))
                     {
-                        string card = deck.DealTopCard();
+                        Card card = deck.DealTopCard();
                         player.cards.Add(card);
                         player.score = ScoreHand(player);
                         if (player.score > 21)
@@ -124,9 +124,9 @@ namespace RaceTo21
             }
             else
             {
-                foreach (string card in player.cards)
+                foreach (Card card in player.cards)
                 {
-                    string faceValue = card.Remove(card.Length - 1);
+                    string faceValue = card.ID.Remove(card.ID.Length - 1);
                     switch (faceValue)
                     {
                         case "K":
