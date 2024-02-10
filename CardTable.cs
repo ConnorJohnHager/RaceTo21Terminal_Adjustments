@@ -64,20 +64,30 @@ namespace RaceTo21
         {
             while (true)
             {
-                Console.Write(player.name + ", do you want a card? (Y/N)");
-                string response = Console.ReadLine();
-                if (response.ToUpper().StartsWith("Y"))
+                if (player.firstCard == true) //Note from Connor: Adjusted idea used for ShowHand method below
                 {
+                    player.firstCard = false;
+                    Console.WriteLine("Dealing first card for " + player.name +"...");
                     return true;
-                }
-                else if (response.ToUpper().StartsWith("N"))
-                {
-                    return false;
                 }
                 else
                 {
+                    Console.Write(player.name + ", do you want a card? (Y/N)");
+                    string response = Console.ReadLine();
+                    if (response.ToUpper().StartsWith("Y"))
+                    {
+                        return true;
+                    }
+                    else if (response.ToUpper().StartsWith("N"))
+                    {
+                        return false;
+                    }
+                    else
+                    {
                     Console.WriteLine("Please answer Y(es) or N(o)!");
+                    }
                 }
+                
             }
         }
 
@@ -86,11 +96,22 @@ namespace RaceTo21
             if (player.cards.Count > 0)
             {
                 Console.Write(player.name + " has: ");
+
+                bool isFirst = true; //Note from Connor: ChatGPT helped develop the idea for using a boolean trigger for after the first card
+
                 foreach (Card card in player.cards)
                 {
-                    Console.Write(card + " ");
+                    if (!isFirst)
+                    {
+                        Console.Write(", ");
+                    }
+                    else
+                    {
+                        isFirst = false;
+                    }
+                    Console.Write(card.name);
                 }
-                Console.Write("=" + player.score + "/21 ");
+                Console.Write(" = " + player.score + "/21 ");
                 if (player.status != PlayerStatus.active)
                 {
                     Console.Write("(" + player.status.ToString().ToUpper() + ")");
