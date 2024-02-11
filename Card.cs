@@ -9,6 +9,6 @@ namespace RaceTo21
     public class Card
     {
         public string ID;
-        public string name; // Option 1: Just store the name for each card alongside the ID
+        public string name;
     }
 }

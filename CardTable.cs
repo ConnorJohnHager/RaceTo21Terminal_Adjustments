@@ -60,11 +60,28 @@ namespace RaceTo21
             return response;
         }
 
+        /*  public string GetPlayerBet(int playerBet)
+            {
+                Console.Write(player.name + ", how many dollars would you like to bet? You currently have $" + player.bank);
+                string response = Console.ReadLine();
+                
+                int potentialBet;
+                bool betSuccess = int.TryParse(response, out potentialBet)
+                
+                while (betSuccess == false)
+                {
+                    Console.WriteLine("Invalid amount.");
+                    Console.Write(player.name + ", how many dollars would you like to bet? You currently have $" + player.bank);
+                    response = Console.ReadLine();
+                }
+                return response;
+            } */
+
         public bool OfferACard(Player player)
         {
             while (true)
             {
-                if (player.cards.Count == 0) //Note from Connor: Adjusted idea used for ShowHand method below
+                if (player.cards.Count == 0)
                 {
                     Console.WriteLine("Dealing first card for " + player.name +"...");
                     return true;
@@ -96,7 +113,7 @@ namespace RaceTo21
             {
                 Console.Write(player.name + " has: ");
 
-                bool isFirst = true; //Note from Connor: ChatGPT helped develop the idea for using a boolean trigger for after the first card
+                bool isFirst = true; //ChatGPT helped develop the idea for using a boolean trigger for after the first card
 
                 foreach (Card card in player.cards)
                 {
