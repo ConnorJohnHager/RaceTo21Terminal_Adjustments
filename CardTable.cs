@@ -60,7 +60,7 @@ namespace RaceTo21
             return response;
         }
 
-        /*  public string GetPlayerBet(int playerBet)
+        /*  public string GetPlayerBet(int playerBet) 
             {
                 Console.Write(player.name + ", how many dollars would you like to bet? You currently have $" + player.bank);
                 string response = Console.ReadLine();
