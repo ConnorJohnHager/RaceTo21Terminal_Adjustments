@@ -70,15 +70,22 @@ namespace RaceTo21
                         if (player.score > 21)
                         {
                             player.status = PlayerStatus.bust;
+                            cardTable.ShowHand(player);
+                            nextTask = Task.CheckForEnd;
                         }
-                        else if (player.score == 21)
+                        else if (player.score == 21)  //Trigger automatic win
                         {
                             player.status = PlayerStatus.win;
+                            Player winner = DoFinalScoring();
+                            cardTable.AnnounceWinner(winner);
+                            nextTask = Task.GameOver;
                         }
                     }
                     else
                     {
                         player.status = PlayerStatus.stay;
+                        cardTable.ShowHand(player);
+                        nextTask = Task.CheckForEnd;
                     }
                 }
                 cardTable.ShowHand(player);
