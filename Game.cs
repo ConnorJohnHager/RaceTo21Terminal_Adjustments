@@ -12,7 +12,6 @@ namespace RaceTo21
         int currentPlayer = 0; // current player on list
         public Task nextTask; // keeps track of game state
         private bool cheating = false; // lets you cheat for testing purposes if true
-        int pot; //In Development
 
         public Game(CardTable c)
         {
