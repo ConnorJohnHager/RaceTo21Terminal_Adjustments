@@ -12,7 +12,7 @@ namespace RaceTo21
         int currentPlayer = 0; // current player on list
         public Task nextTask; // keeps track of game state
         private bool cheating = false; // lets you cheat for testing purposes if true
-        int pot; //In Development
+        public int pot; //In Development
 
         public Game(CardTable c)
         {
@@ -55,8 +55,17 @@ namespace RaceTo21
             else if (nextTask == Task.IntroducePlayers)
             {
                 cardTable.ShowPlayers(players);
-                nextTask = Task.PlayerTurn;
+                nextTask = Task.PlayerTurn; // need to change to Task.GetBets when ready
             }
+            /*  else if (nextTask == Task.GetBets)
+                {
+                    foreach (Player player in players)
+                    {
+                        int bet = cardTable.GetPlayerBet(); //I think it pulls potentialBet as an int, then stores the value in bet?
+                        pot += bet;
+                    }
+                    nextTask = Task.PlayerTurn; 
+                } */
             else if (nextTask == Task.PlayerTurn)
             {
                 cardTable.ShowHands(players);

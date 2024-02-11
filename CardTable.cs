@@ -60,22 +60,22 @@ namespace RaceTo21
             return response;
         }
 
-        /*  public string GetPlayerBet(int playerBet) 
+        /*public int GetPlayerBet(List<Player> players) 
+        {
+            Console.Write(player.name + ", how many dollars would you like to bet? You currently have $" + player.bank);
+            string response = Console.ReadLine();
+            int potentialBet;
+                    
+            bool betSuccess = int.TryParse(response, out potentialBet)
+                
+            while (betSuccess == false)
             {
+                Console.WriteLine("Invalid amount.");
                 Console.Write(player.name + ", how many dollars would you like to bet? You currently have $" + player.bank);
-                string response = Console.ReadLine();
-                
-                int potentialBet;
-                bool betSuccess = int.TryParse(response, out potentialBet)
-                
-                while (betSuccess == false)
-                {
-                    Console.WriteLine("Invalid amount.");
-                    Console.Write(player.name + ", how many dollars would you like to bet? You currently have $" + player.bank);
-                    response = Console.ReadLine();
-                }
-                return response;
-            } */
+                response = Console.ReadLine();
+            }
+            return potentialBet;
+        } */
 
         public bool OfferACard(Player player)
         {

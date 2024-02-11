@@ -9,7 +9,7 @@ namespace RaceTo21
 		public List<Card> cards = new List<Card>();
 		public PlayerStatus status = PlayerStatus.active;
 		public int score;
-		public int bank = 50; //In Development
+		public int bank = 100; //In Development
 
 		public Player(string n)
 		{
