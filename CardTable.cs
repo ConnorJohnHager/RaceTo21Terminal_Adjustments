@@ -64,9 +64,8 @@ namespace RaceTo21
         {
             while (true)
             {
-                if (player.firstCard == true) //Note from Connor: Adjusted idea used for ShowHand method below
+                if (player.cards.Count == 0) //Note from Connor: Adjusted idea used for ShowHand method below
                 {
-                    player.firstCard = false;
                     Console.WriteLine("Dealing first card for " + player.name +"...");
                     return true;
                 }
