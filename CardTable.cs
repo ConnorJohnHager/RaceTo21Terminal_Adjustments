@@ -60,14 +60,27 @@ namespace RaceTo21
             return response;
         }
 
-        /*
+        /* Gets the bet of a player
+         * Is called by Game object
+         * Game object provides player
+         * Returns potential bet of player to Game object
+         */
         public int GetPlayerBet(Player player) 
         {
+            /*
+            
+            Current bug I am experiencing: 
+            - I had a player submit 110 (higher than their bank value) 
+            - Then I had them submit DOG (not an integer)
+            - Then I submitted 10, but no correct value would work
+            
+             */
+
             Console.Write(player.name + ", how many dollars would you like to bet? You currently have $" + player.bank + ". ");
             string response = Console.ReadLine();
             int potentialBet;
-                    
-            bool betSuccess = int.TryParse(response, out potentialBet)
+
+            bool betSuccess = int.TryParse(response, out potentialBet);
                 
             while (betSuccess == false)
             {
@@ -86,17 +99,6 @@ namespace RaceTo21
             }
             return potentialBet;
         } 
-        
-        public void ShowBet(int bet)
-        {
-            Console.WriteLine(player.name + " bet $" + bet + ".")
-        }
-
-        public void ShowPot(int pot)
-        {
-            Console.WriteLine("The winner of this round will receive $" + pot + ".")
-        }
-        */
 
         public bool OfferACard(Player player)
         {

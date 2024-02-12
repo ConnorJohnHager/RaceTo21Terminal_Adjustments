@@ -13,6 +13,7 @@ namespace RaceTo21
         public Task nextTask; // keeps track of game state
         private bool cheating = false; // lets you cheat for testing purposes if true
         public int pot; //In Development
+        public int bet; //In Development
 
         public Game(CardTable c)
         {
@@ -55,20 +56,20 @@ namespace RaceTo21
             else if (nextTask == Task.IntroducePlayers)
             {
                 cardTable.ShowPlayers(players);
-                nextTask = Task.PlayerTurn; // need to change to Task.GetBets when ready
+                nextTask = Task.GetBets;
             }
-            /*  else if (nextTask == Task.GetBets)
+            else if (nextTask == Task.GetBets)
+            {
+                foreach (Player player in players)
                 {
-                    foreach (Player player in players)
-                    {
-                        int bet = cardTable.GetPlayerBet(); //I think it pulls potentialBet as an int, then stores the value in bet?
-                        player.bank -= bet;
-                        pot += bet;
-                        ShowBet(bet);
-                    }
+                    bet = cardTable.GetPlayerBet(player); //I think it pulls potentialBet as an int, then stores the value in bet?
+                    player.bank -= bet;
+                    pot += bet;
+                    ShowBet(player, bet);
+                }
                     ShowPot(pot);
                     nextTask = Task.PlayerTurn; 
-                } */
+            }
             else if (nextTask == Task.PlayerTurn)
             {
                 cardTable.ShowHands(players);
@@ -127,6 +128,16 @@ namespace RaceTo21
                 Console.WriteLine("I'm sorry, I don't know what to do now!");
                 nextTask = Task.GameOver;
             }
+        }
+
+        public void ShowBet(Player player, int bet)
+        {
+            Console.WriteLine(player.name + " bet $" + bet + ".");
+        }
+
+        public void ShowPot(int pot)
+        {
+            Console.WriteLine("The winner of this round will receive $" + pot + ".");
         }
 
         public int ScoreHand(Player player)
