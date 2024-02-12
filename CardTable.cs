@@ -67,15 +67,6 @@ namespace RaceTo21
          */
         public int GetPlayerBet(Player player) 
         {
-            /*
-            
-            Current bug I am experiencing: 
-            - I had a player submit 110 (higher than their bank value) 
-            - Then I had them submit DOG (not an integer)
-            - Then I submitted 10, but no correct value would work
-            
-             */
-
             Console.Write(player.name + ", how many dollars would you like to bet? You currently have $" + player.bank + ". ");
             string response = Console.ReadLine();
             int potentialBet;
@@ -87,6 +78,7 @@ namespace RaceTo21
                 Console.WriteLine("Invalid amount.");
                 Console.Write(player.name + ", how many dollars would you like to bet? You currently have $" + player.bank + ". ");
                 response = Console.ReadLine();
+                betSuccess = int.TryParse(response, out potentialBet);
             }
 
             potentialBet = int.Parse(response);
@@ -96,6 +88,12 @@ namespace RaceTo21
                 Console.WriteLine("Invalid amount.");
                 Console.Write(player.name + ", how many dollars would you like to bet? You currently have $" + player.bank + ". ");
                 response = Console.ReadLine();
+                betSuccess = int.TryParse(response, out potentialBet);
+
+                if (betSuccess == false)
+                {
+                    continue; //Got this last continue from ChatGPT to make user repeat steps if they keep switching between the two error types
+                }
             }
             return potentialBet;
         } 
@@ -168,7 +166,7 @@ namespace RaceTo21
         }
 
 
-        public void AnnounceWinner(Player player)
+        public void AnnounceWinner(Player player) 
         {
             if (player != null)
             {

@@ -11,9 +11,9 @@ namespace RaceTo21
         Deck deck = new Deck(); // deck of cards
         int currentPlayer = 0; // current player on list
         public Task nextTask; // keeps track of game state
+        public int bet; // bet that each player makes for the round
+        public int pot; // total bets for the round to be given to winner
         private bool cheating = false; // lets you cheat for testing purposes if true
-        public int pot; //In Development
-        public int bet; //In Development
 
         public Game(CardTable c)
         {
@@ -62,7 +62,7 @@ namespace RaceTo21
             {
                 foreach (Player player in players)
                 {
-                    bet = cardTable.GetPlayerBet(player); //I think it pulls potentialBet as an int, then stores the value in bet?
+                    bet = cardTable.GetPlayerBet(player);
                     player.bank -= bet;
                     pot += bet;
                     ShowBet(player, bet);
@@ -87,7 +87,7 @@ namespace RaceTo21
                             cardTable.ShowHand(player);
                             nextTask = Task.CheckForEnd;
                         }
-                        else if (player.score == 21)  //Trigger automatic win
+                        else if (player.score == 21)  // Triggers automatic win when someone gets 21
                         {
                             player.status = PlayerStatus.win;
                             Player winner = DoFinalScoring();
@@ -110,7 +110,7 @@ namespace RaceTo21
                 if (!CheckActivePlayers())
                 {
                     Player winner = DoFinalScoring();
-                    cardTable.AnnounceWinner(winner);
+                    cardTable.AnnounceWinner(winner); // ***TO DO***: Need to empty the pot and add the money to the winner's bank
                     nextTask = Task.GameOver;
                 }
                 else
