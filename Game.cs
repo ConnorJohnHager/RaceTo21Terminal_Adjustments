@@ -65,9 +65,9 @@ namespace RaceTo21
                     bet = cardTable.GetPlayerBet(player);
                     player.bank -= bet;
                     pot += bet;
-                    ShowBet(player, bet);
+                    cardTable.ShowBet(player, bet);
                 }
-                    ShowPot(pot);
+                    cardTable.ShowPot(pot);
                     nextTask = Task.PlayerTurn; 
             }
             else if (nextTask == Task.PlayerTurn)
@@ -128,16 +128,6 @@ namespace RaceTo21
                 Console.WriteLine("I'm sorry, I don't know what to do now!");
                 nextTask = Task.GameOver;
             }
-        }
-
-        public void ShowBet(Player player, int bet)
-        {
-            Console.WriteLine(player.name + " bet $" + bet + ".");
-        }
-
-        public void ShowPot(int pot)
-        {
-            Console.WriteLine("The winner of this round will receive $" + pot + ".");
         }
 
         public int ScoreHand(Player player)

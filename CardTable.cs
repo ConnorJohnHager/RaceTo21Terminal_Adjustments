@@ -96,7 +96,17 @@ namespace RaceTo21
                 }
             }
             return potentialBet;
-        } 
+        }
+
+        public void ShowBet(Player player, int bet)
+        {
+            Console.WriteLine(player.name + " bet $" + bet + ".");
+        }
+
+        public void ShowPot(int pot)
+        {
+            Console.WriteLine("The winner of this round will receive $" + pot + ".");
+        }
 
         public bool OfferACard(Player player)
         {
