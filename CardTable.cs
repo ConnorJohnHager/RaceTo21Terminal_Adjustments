@@ -60,9 +60,10 @@ namespace RaceTo21
             return response;
         }
 
-        /*public int GetPlayerBet(List<Player> players) 
+        /*
+        public int GetPlayerBet(Player player) 
         {
-            Console.Write(player.name + ", how many dollars would you like to bet? You currently have $" + player.bank);
+            Console.Write(player.name + ", how many dollars would you like to bet? You currently have $" + player.bank + ". ");
             string response = Console.ReadLine();
             int potentialBet;
                     
@@ -71,11 +72,31 @@ namespace RaceTo21
             while (betSuccess == false)
             {
                 Console.WriteLine("Invalid amount.");
-                Console.Write(player.name + ", how many dollars would you like to bet? You currently have $" + player.bank);
+                Console.Write(player.name + ", how many dollars would you like to bet? You currently have $" + player.bank + ". ");
+                response = Console.ReadLine();
+            }
+
+            potentialBet = int.Parse(response);
+
+            while (potentialBet < 1 || potentialBet > player.bank) 
+            {
+                Console.WriteLine("Invalid amount.");
+                Console.Write(player.name + ", how many dollars would you like to bet? You currently have $" + player.bank + ". ");
                 response = Console.ReadLine();
             }
             return potentialBet;
-        } */
+        } 
+        
+        public void ShowBet(int bet)
+        {
+            Console.WriteLine(player.name + " bet $" + bet + ".")
+        }
+
+        public void ShowPot(int pot)
+        {
+            Console.WriteLine("The winner of this round will receive $" + pot + ".")
+        }
+        */
 
         public bool OfferACard(Player player)
         {

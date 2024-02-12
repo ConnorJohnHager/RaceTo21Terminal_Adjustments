@@ -62,8 +62,11 @@ namespace RaceTo21
                     foreach (Player player in players)
                     {
                         int bet = cardTable.GetPlayerBet(); //I think it pulls potentialBet as an int, then stores the value in bet?
+                        player.bank -= bet;
                         pot += bet;
+                        ShowBet(bet);
                     }
+                    ShowPot(pot);
                     nextTask = Task.PlayerTurn; 
                 } */
             else if (nextTask == Task.PlayerTurn)
