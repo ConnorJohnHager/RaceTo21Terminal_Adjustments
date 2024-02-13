@@ -176,11 +176,11 @@ namespace RaceTo21
         }
 
 
-        public void AnnounceWinner(Player player) 
+        public void AnnounceWinner(Player player, int pot) 
         {
             if (player != null)
             {
-                Console.WriteLine(player.name + " wins!");
+                Console.WriteLine(player.name + " wins $" + pot + "!");
             }
             else
             {

@@ -91,7 +91,8 @@ namespace RaceTo21
                         {
                             player.status = PlayerStatus.win;
                             Player winner = DoFinalScoring();
-                            cardTable.AnnounceWinner(winner);
+                            cardTable.AnnounceWinner(winner, pot);
+                            winner.bank += pot;
                             nextTask = Task.GameOver;
                         }
                     }
@@ -110,7 +111,8 @@ namespace RaceTo21
                 if (!CheckActivePlayers())
                 {
                     Player winner = DoFinalScoring();
-                    cardTable.AnnounceWinner(winner); // ***TO DO***: Need to empty the pot and add the money to the winner's bank
+                    cardTable.AnnounceWinner(winner, pot);
+                    winner.bank += pot;
                     nextTask = Task.GameOver;
                 }
                 else
