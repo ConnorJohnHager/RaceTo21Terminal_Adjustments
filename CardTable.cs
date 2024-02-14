@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Numerics;
 
 namespace RaceTo21
 {
@@ -127,6 +128,20 @@ namespace RaceTo21
             }
         }
 
+        public void AllButOneBust(List<Player> players)
+        {
+            foreach (Player player in players)
+            {
+                if (player.score < 21)
+                {
+                    player.status = PlayerStatus.win;
+                }
+                else
+                {
+                    continue;
+                }
+            }
+        }
 
         public void AnnounceWinner(Player player)
         {

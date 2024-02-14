@@ -12,6 +12,7 @@ namespace RaceTo21
         int currentPlayer = 0; // current player on list
         public Task nextTask; // keeps track of game state
         private bool cheating = false; // lets you cheat for testing purposes if true
+        public int busted = 0;
 
         public Game(CardTable c)
         {
@@ -70,7 +71,7 @@ namespace RaceTo21
                         if (player.score > 21)
                         {
                             player.status = PlayerStatus.bust;
-                            cardTable.ShowHand(player);
+                            busted++;
                             nextTask = Task.CheckForEnd;
                         }
                         else if (player.score == 21)  //Trigger automatic win
@@ -80,20 +81,28 @@ namespace RaceTo21
                             cardTable.AnnounceWinner(winner);
                             nextTask = Task.GameOver;
                         }
+                        else
+                        {
+                            nextTask = Task.CheckForEnd;
+                        }
                     }
                     else
                     {
                         player.status = PlayerStatus.stay;
-                        cardTable.ShowHand(player);
                         nextTask = Task.CheckForEnd;
                     }
                 }
-                cardTable.ShowHand(player);
-                nextTask = Task.CheckForEnd;
             }
             else if (nextTask == Task.CheckForEnd)
             {
-                if (!CheckActivePlayers())
+                if (busted == players.Count - 1)
+                {
+                    cardTable.AllButOneBust(players);
+                    Player winner = DoFinalScoring();
+                    cardTable.AnnounceWinner(winner);
+                    nextTask = Task.GameOver;
+                }
+                else if (!CheckActivePlayers())
                 {
                     Player winner = DoFinalScoring();
                     cardTable.AnnounceWinner(winner);
