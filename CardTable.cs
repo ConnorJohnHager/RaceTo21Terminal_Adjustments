@@ -128,21 +128,6 @@ namespace RaceTo21
             }
         }
 
-        public void AllButOneBust(List<Player> players)
-        {
-            foreach (Player player in players)
-            {
-                if (player.score < 21)
-                {
-                    player.status = PlayerStatus.win;
-                }
-                else
-                {
-                    continue;
-                }
-            }
-        }
-
         public void AnnounceWinner(Player player)
         {
             if (player != null)

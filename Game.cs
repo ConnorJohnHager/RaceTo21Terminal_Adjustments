@@ -97,7 +97,7 @@ namespace RaceTo21
             {
                 if (busted == players.Count - 1)
                 {
-                    cardTable.AllButOneBust(players);
+                    AllButOneBust(players);
                     Player winner = DoFinalScoring();
                     cardTable.AnnounceWinner(winner);
                     nextTask = Task.GameOver;
@@ -173,6 +173,21 @@ namespace RaceTo21
                 }
             }
             return false; // everyone has stayed or busted, or someone won!
+        }
+
+        public void AllButOneBust(List<Player> players)
+        {
+            foreach (Player player in players)
+            {
+                if (player.score < 21)
+                {
+                    player.status = PlayerStatus.win;
+                }
+                else
+                {
+                    continue;
+                }
+            }
         }
 
         public Player DoFinalScoring()
