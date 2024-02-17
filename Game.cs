@@ -13,6 +13,7 @@ namespace RaceTo21
         public Task nextTask; // keeps track of game state
         public int bet; // bet that each player makes for the round
         public int pot; // total bets for the round to be given to winner
+        public int busted = 0; // counting how many players have busted
         private bool cheating = false; // lets you cheat for testing purposes if true
 
         public Game(CardTable c)
@@ -84,36 +85,48 @@ namespace RaceTo21
                         if (player.score > 21)
                         {
                             player.status = PlayerStatus.bust;
-                            cardTable.ShowHand(player);
+                            busted++;
                             nextTask = Task.CheckForEnd;
                         }
                         else if (player.score == 21)  // Triggers automatic win when someone gets 21
                         {
                             player.status = PlayerStatus.win;
                             Player winner = DoFinalScoring();
+                            cardTable.ShowHands(players);
                             cardTable.AnnounceWinner(winner, pot);
                             winner.bank += pot;
-                            nextTask = Task.GameOver;
+                            nextTask = Task.CheckForNextRound;
+                        }
+                        else
+                        {
+                            nextTask = Task.CheckForEnd;
                         }
                     }
                     else
                     {
                         player.status = PlayerStatus.stay;
-                        cardTable.ShowHand(player);
                         nextTask = Task.CheckForEnd;
                     }
                 }
-                cardTable.ShowHand(player);
-                nextTask = Task.CheckForEnd;
             }
             else if (nextTask == Task.CheckForEnd)
             {
-                if (!CheckActivePlayers())
+                if (busted == players.Count - 1)
                 {
+                    AllButOneBust(players);
                     Player winner = DoFinalScoring();
+                    cardTable.ShowHands(players);
                     cardTable.AnnounceWinner(winner, pot);
                     winner.bank += pot;
-                    nextTask = Task.GameOver;
+                    nextTask = Task.CheckForNextRound;
+                }
+                else if (!CheckActivePlayers())
+                {
+                    Player winner = DoFinalScoring();
+                    cardTable.ShowHands(players);
+                    cardTable.AnnounceWinner(winner, pot);
+                    winner.bank += pot;
+                    nextTask = Task.CheckForNextRound;
                 }
                 else
                 {
@@ -125,7 +138,19 @@ namespace RaceTo21
                     nextTask = Task.PlayerTurn;
                 }
             }
-            else // we shouldn't get here...
+            else if (nextTask == Task.CheckForNextRound)
+            {
+                bool anotherRound = cardTable.AnotherRound();
+                if (anotherRound == true)
+                {
+                    ResetRound();
+                }
+                else
+                {
+                    nextTask = Task.GameOver;
+                }
+            }
+            else 
             {
                 Console.WriteLine("I'm sorry, I don't know what to do now!");
                 nextTask = Task.GameOver;
@@ -182,12 +207,26 @@ namespace RaceTo21
             return false; // everyone has stayed or busted, or someone won!
         }
 
+        public void AllButOneBust(List<Player> players)
+        {
+            foreach (Player player in players)
+            {
+                if (player.score < 21)
+                {
+                    player.status = PlayerStatus.win;
+                }
+                else
+                {
+                    continue;
+                }
+            }
+        }
+
         public Player DoFinalScoring()
         {
             int highScore = 0;
             foreach (var player in players)
             {
-                cardTable.ShowHand(player);
                 if (player.status == PlayerStatus.win) // someone hit 21
                 {
                     return player;
@@ -207,6 +246,22 @@ namespace RaceTo21
                 return players.Find(player => player.score == highScore);
             }
             return null; // everyone must have busted because nobody won!
+        }
+
+        public void ResetRound()
+        {
+            foreach (Player player in players)
+            {
+                player.cards.Clear();
+                player.score = 0;
+                player.status = PlayerStatus.active;
+            }
+
+            deck = new Deck();
+            deck.Shuffle();
+            pot = 0;
+
+            nextTask = Task.IntroducePlayers;
         }
     }
 }
