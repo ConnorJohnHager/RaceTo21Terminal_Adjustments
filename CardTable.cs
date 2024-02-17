@@ -136,10 +136,29 @@ namespace RaceTo21
             }
             else
             {
-                Console.WriteLine("Everyone busted!");
+                Console.WriteLine("Everyone busted!"); // shouldn't be possible
             }
-            Console.Write("Press <Enter> to exit... ");
-            while (Console.ReadKey().Key != ConsoleKey.Enter) { }
+        }
+
+        public bool AnotherRound()
+        {
+            while (true)
+            {
+                Console.Write("Would you like to play another game? (Y/N)");
+                string response = Console.ReadLine();
+                if (response.ToUpper().StartsWith("Y"))
+                {
+                    return true;
+                }
+                else if (response.ToUpper().StartsWith("N"))
+                {
+                    return false;
+                }
+                else
+                {
+                    Console.WriteLine("Please answer Y(es) or N(o)!");
+                }
+            }
         }
     }
 }

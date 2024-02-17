@@ -78,8 +78,9 @@ namespace RaceTo21
                         {
                             player.status = PlayerStatus.win;
                             Player winner = DoFinalScoring();
+                            cardTable.ShowHands(players);
                             cardTable.AnnounceWinner(winner);
-                            nextTask = Task.GameOver;
+                            nextTask = Task.CheckForNextRound;
                         }
                         else
                         {
@@ -99,14 +100,16 @@ namespace RaceTo21
                 {
                     AllButOneBust(players);
                     Player winner = DoFinalScoring();
+                    cardTable.ShowHands(players);
                     cardTable.AnnounceWinner(winner);
-                    nextTask = Task.GameOver;
+                    nextTask = Task.CheckForNextRound;
                 }
                 else if (!CheckActivePlayers())
                 {
                     Player winner = DoFinalScoring();
+                    cardTable.ShowHands(players);
                     cardTable.AnnounceWinner(winner);
-                    nextTask = Task.GameOver;
+                    nextTask = Task.CheckForNextRound;
                 }
                 else
                 {
@@ -118,7 +121,19 @@ namespace RaceTo21
                     nextTask = Task.PlayerTurn;
                 }
             }
-            else // we shouldn't get here...
+            else if (nextTask == Task.CheckForNextRound)
+            {
+                bool anotherRound = cardTable.AnotherRound();
+                if (anotherRound == true)
+                {
+                    ResetRound();
+                }
+                else
+                {
+                    nextTask = Task.GameOver;
+                }
+            }
+            else 
             {
                 Console.WriteLine("I'm sorry, I don't know what to do now!");
                 nextTask = Task.GameOver;
@@ -195,7 +210,6 @@ namespace RaceTo21
             int highScore = 0;
             foreach (var player in players)
             {
-                cardTable.ShowHand(player);
                 if (player.status == PlayerStatus.win) // someone hit 21
                 {
                     return player;
@@ -215,6 +229,21 @@ namespace RaceTo21
                 return players.Find(player => player.score == highScore);
             }
             return null; // everyone must have busted because nobody won!
+        }
+
+        public void ResetRound()
+        {
+            foreach (Player player in players)
+            {
+                player.cards.Clear();
+                player.score = 0;
+                player.status = PlayerStatus.active;
+            }
+
+            deck = new Deck();
+            deck.Shuffle();
+
+            nextTask = Task.IntroducePlayers;
         }
     }
 }
