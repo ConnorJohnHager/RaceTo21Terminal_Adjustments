@@ -12,6 +12,9 @@ namespace RaceTo21
             {
                 game.DoNextTask();
             }
+
+            Console.Write("Press <Enter> to exit... ");
+            while (Console.ReadKey().Key != ConsoleKey.Enter) { }
         }
     }
 }
