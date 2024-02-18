@@ -85,16 +85,29 @@ namespace RaceTo21
             return potentialBet;
         }
 
+        /* Shows the bet of a player
+         * Is called by Game object
+         * Game object provides player and bet
+         */
         public void ShowBet(Player player, int bet)
         {
             Console.WriteLine(player.name + " bet $" + bet + ".");
         }
 
+        /* Shows the pot for current round
+         * Is called by Game object
+         * Game object provides pot
+         */
         public void ShowPot(int pot)
         {
             Console.WriteLine("The winner of this round will receive $" + pot + ".");
         }
 
+        /* Asks players if they would like to draw a card
+         * Is called by Game object
+         * Game object provides player
+         * Returns true to draw a card or false to not draw
+         */
         public bool OfferACard(Player player)
         {
             while (true)
@@ -125,6 +138,10 @@ namespace RaceTo21
             }
         }
 
+        /* Shows the cards of a player
+         * Is called by Game object and ShowHands method
+         * Game object provides player
+         */
         public void ShowHand(Player player)
         {
             if (player.cards.Count > 0)
@@ -154,6 +171,11 @@ namespace RaceTo21
             }
         }
 
+        /* Shows the hands of all players
+         * Is called by Game object
+         * Game object provides list of players
+         * Calls ShowHand method for each player
+         */
         public void ShowHands(List<Player> players)
         {
             foreach (Player player in players)
@@ -162,6 +184,10 @@ namespace RaceTo21
             }
         }
 
+        /* Announces the winner of the game
+         * Is called by Game object
+         * Game object provides player and pot
+         */
         public void AnnounceWinner(Player player, int pot) 
         {
             if (player != null)
@@ -174,6 +200,10 @@ namespace RaceTo21
             }
         }
 
+        /* Asks players if they would like another round
+         * Is called by Game object
+         * Returns true to play another round or false if not
+         */
         public bool AnotherRound()
         {
             while (true)
