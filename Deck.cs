@@ -10,7 +10,7 @@ namespace RaceTo21
 
         public Deck()
         {
-            Console.WriteLine("Building deck...");
+            Console.WriteLine("Building Deck...");
             string[] suits = { "S", "H", "C", "D" };
 
             for (int cardVal = 1; cardVal <= 13; cardVal++)

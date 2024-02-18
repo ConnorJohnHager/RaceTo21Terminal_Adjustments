@@ -14,7 +14,6 @@ namespace RaceTo21
         public int bet; // bet that each player makes for the round
         public int pot; // total bets for the round to be given to winner
         public int busted = 0; // counting how many players have busted
-        private bool cheating = false; // lets you cheat for testing purposes if true
 
         public Game(CardTable c)
         {
@@ -161,35 +160,22 @@ namespace RaceTo21
         public int ScoreHand(Player player)
         {
             int score = 0;
-            if (cheating == true && player.status == PlayerStatus.active)
+            foreach (Card card in player.cards)
             {
-                string response = null;
-                while (int.TryParse(response, out score) == false)
+                string faceValue = card.ID.Remove(card.ID.Length - 1);
+                switch (faceValue)
                 {
-                    Console.Write("OK, what should player " + player.name + "'s score be?");
-                    response = Console.ReadLine();
-                }
-                return score;
-            }
-            else
-            {
-                foreach (Card card in player.cards)
-                {
-                    string faceValue = card.ID.Remove(card.ID.Length - 1);
-                    switch (faceValue)
-                    {
-                        case "K":
-                        case "Q":
-                        case "J":
-                            score = score + 10;
-                            break;
-                        case "A":
-                            score = score + 1;
-                            break;
-                        default:
-                            score = score + int.Parse(faceValue);
-                            break;
-                    }
+                    case "K":
+                    case "Q":
+                    case "J":
+                        score = score + 10;
+                        break;
+                    case "A":
+                        score = score + 1;
+                        break;
+                    default:
+                        score = score + int.Parse(faceValue);
+                        break;
                 }
             }
             return score;
