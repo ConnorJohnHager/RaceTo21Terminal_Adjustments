@@ -108,6 +108,7 @@ namespace RaceTo21
                         nextTask = Task.CheckForEnd;
                     }
                 }
+                nextTask = Task.CheckForEnd;
             }
             else if (nextTask == Task.CheckForEnd)
             {
@@ -260,6 +261,7 @@ namespace RaceTo21
             deck = new Deck();
             deck.Shuffle();
             pot = 0;
+            currentPlayer = 0;
 
             nextTask = Task.IntroducePlayers;
         }
