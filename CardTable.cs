@@ -37,7 +37,7 @@ namespace RaceTo21
                 || numberOfPlayers < 2 || numberOfPlayers > 8)
             {
                 Console.WriteLine("Invalid number of players.");
-                Console.Write("How many players?");
+                Console.Write("How many players? ");
                 response = Console.ReadLine();
             }
             return numberOfPlayers;
@@ -73,28 +73,14 @@ namespace RaceTo21
             int potentialBet;
 
             bool betSuccess = int.TryParse(response, out potentialBet);
-                
-            while (betSuccess == false)
+
+            while(betSuccess == false || potentialBet < 1 || potentialBet > player.bank)
             {
                 Console.WriteLine("Invalid amount.");
                 Console.Write(player.name + ", how many dollars would you like to bet? You currently have $" + player.bank + ". ");
                 response = Console.ReadLine();
                 betSuccess = int.TryParse(response, out potentialBet);
-            }
-
-            potentialBet = int.Parse(response);
-
-            while (potentialBet < 1 || potentialBet > player.bank) 
-            {
-                Console.WriteLine("Invalid amount.");
-                Console.Write(player.name + ", how many dollars would you like to bet? You currently have $" + player.bank + ". ");
-                response = Console.ReadLine();
-                betSuccess = int.TryParse(response, out potentialBet);
-
-                if (betSuccess == false)
-                {
-                    continue; //Got this last continue from ChatGPT to make user repeat steps if they keep switching between the two error types
-                }
+                potentialBet = int.Parse(response);
             }
             return potentialBet;
         }
@@ -120,7 +106,7 @@ namespace RaceTo21
                 }
                 else
                 {
-                    Console.Write(player.name + ", do you want a card? (Y/N)");
+                    Console.Write(player.name + ", do you want a card? (Y/N) ");
                     string response = Console.ReadLine();
                     if (response.ToUpper().StartsWith("Y"))
                     {
@@ -192,7 +178,7 @@ namespace RaceTo21
         {
             while (true)
             {
-                Console.Write("Would you like to play another game? (Y/N)");
+                Console.Write("Would you like to play another game? (Y/N) ");
                 string response = Console.ReadLine();
                 if (response.ToUpper().StartsWith("Y"))
                 {
