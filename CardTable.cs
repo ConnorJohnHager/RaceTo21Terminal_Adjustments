@@ -134,7 +134,6 @@ namespace RaceTo21
                     Console.WriteLine("Please answer Y(es) or N(o)!");
                     }
                 }
-                
             }
         }
 
