@@ -108,6 +108,11 @@ namespace RaceTo21
                         player.status = PlayerStatus.stay;
                         nextTask = Task.CheckForEnd;
                     }
+
+                }
+                else
+                {
+                    nextTask = Task.CheckForEnd;
                 }
             }
             else if (nextTask == Task.CheckForEnd)
@@ -260,6 +265,7 @@ namespace RaceTo21
             deck.Shuffle();
             pot = 0;
             currentPlayer = 0;
+            busted = 0;
 
             nextTask = Task.GetBets;
         }
