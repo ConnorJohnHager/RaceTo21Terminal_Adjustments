@@ -8,7 +8,7 @@ namespace RaceTo21
     {
         int numberOfPlayers; // number of players in current game
         List<Player> players = new List<Player>(); // list of objects containing player data
-        List<Player> removedPlayers = new List<Player>(); // list of players to be removed
+        List<Player> removedPlayers = new List<Player>(); // list of players to be removed at end of round
         CardTable cardTable; // object in charge of displaying game information
         Deck deck = new Deck(); // deck of cards
         int currentPlayer = 0; // current player on list
@@ -147,10 +147,11 @@ namespace RaceTo21
                 {
                     for (int i = 0; i < removedPlayers.Count; i++)
                     {
+                        Console.WriteLine("Removing " + removedPlayers[i].name + " from game.");
                         players.Remove(removedPlayers[i]);
                     }
                 }
-                if (players.Count > 0)
+                if (players.Count > 1)
                 {
                     ResetRound();
                 }

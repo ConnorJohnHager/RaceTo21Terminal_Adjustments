@@ -214,22 +214,31 @@ namespace RaceTo21
             {
                 while (check == false)
                 {
-                    Console.Write(player.name + ", would you like to play another game? (Y/N) ");
-                    string response = Console.ReadLine();
-
-                    if (response.ToUpper().StartsWith("Y"))
+                    if (player.bank == 0)
                     {
-                        check = true;
-                    }
-                    else if (response.ToUpper().StartsWith("N"))
-                    {
-                        Console.WriteLine("Goodbye " + player.name + "!");
+                        Console.WriteLine(player.name + ", you're bank is now empty. Thanks for playing!");
                         removedPlayers.Add(player);
                         check = true;
                     }
                     else
                     {
-                        Console.WriteLine("Please answer Y(es) or N(o)!");
+                        Console.Write(player.name + ", would you like to play another game? (Y/N) ");
+                        string response = Console.ReadLine();
+
+                        if (response.ToUpper().StartsWith("Y"))
+                        {
+                            check = true;
+                        }
+                        else if (response.ToUpper().StartsWith("N"))
+                        {
+                            Console.WriteLine("Goodbye " + player.name + "!");
+                            removedPlayers.Add(player);
+                            check = true;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Please answer Y(es) or N(o)!");
+                        }
                     }
                 }
                 check = false;
