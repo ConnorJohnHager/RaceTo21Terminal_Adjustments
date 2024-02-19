@@ -8,6 +8,7 @@ namespace RaceTo21
     {
         int numberOfPlayers; // number of players in current game
         List<Player> players = new List<Player>(); // list of objects containing player data
+        List<Player> removedPlayers = new List<Player>(); // list of players to be removed
         CardTable cardTable; // object in charge of displaying game information
         Deck deck = new Deck(); // deck of cards
         int currentPlayer = 0; // current player on list
@@ -140,7 +141,6 @@ namespace RaceTo21
             }
             else if (nextTask == Task.CheckForNextRound)
             {
-                List<Player> removedPlayers = new List<Player>();
                 removedPlayers = cardTable.AnotherRound(players);
 
                 if (removedPlayers.Count > 0)
@@ -247,6 +247,8 @@ namespace RaceTo21
 
         public void ResetRound()
         {
+            removedPlayers.Clear();
+
             foreach (Player player in players)
             {
                 player.cards.Clear();
