@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Numerics;
 
 namespace RaceTo21
 {
@@ -150,7 +151,7 @@ namespace RaceTo21
                         players.Remove(removedPlayers[i]);
                     }
                 }
-                if (players.Count > 1)
+                if (players.Count > 0)
                 {
                     ResetRound();
                 }
