@@ -216,7 +216,7 @@ namespace RaceTo21
                 {
                     if (player.bank == 0)
                     {
-                        Console.WriteLine(player.name + ", you're bank is now empty. Thanks for playing!");
+                        Console.WriteLine(player.name + ", you're bank is now empty. Goodbye, " + player.name + "!");
                         removedPlayers.Add(player);
                         check = true;
                     }
@@ -231,7 +231,7 @@ namespace RaceTo21
                         }
                         else if (response.ToUpper().StartsWith("N"))
                         {
-                            Console.WriteLine("Goodbye " + player.name + "!");
+                            Console.WriteLine("Goodbye, " + player.name + "!");
                             removedPlayers.Add(player);
                             check = true;
                         }

@@ -147,7 +147,6 @@ namespace RaceTo21
                 {
                     for (int i = 0; i < removedPlayers.Count; i++)
                     {
-                        Console.WriteLine("Removing " + removedPlayers[i].name + " from game.");
                         players.Remove(removedPlayers[i]);
                     }
                 }
