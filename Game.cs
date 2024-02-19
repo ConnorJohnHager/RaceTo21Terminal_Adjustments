@@ -108,7 +108,6 @@ namespace RaceTo21
                         nextTask = Task.CheckForEnd;
                     }
                 }
-                nextTask = Task.CheckForEnd;
             }
             else if (nextTask == Task.CheckForEnd)
             {
