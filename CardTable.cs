@@ -202,27 +202,39 @@ namespace RaceTo21
 
         /* Asks players if they would like another round
          * Is called by Game object
-         * Returns true to play another round or false if not
+         * Game object provides list of players
+         * Returns a list of players to remove
          */
-        public bool AnotherRound()
+        public List<Player> AnotherRound(List<Player> players)
         {
-            while (true)
+            List<Player> removedPlayers = new List<Player>();
+            bool check = false;
+
+            foreach(Player player in players)
             {
-                Console.Write("Would you like to play another game? (Y/N) ");
-                string response = Console.ReadLine();
-                if (response.ToUpper().StartsWith("Y"))
+                while (check == false)
                 {
-                    return true;
+                    Console.Write(player.name + ", would you like to play another game? (Y/N) ");
+                    string response = Console.ReadLine();
+
+                    if (response.ToUpper().StartsWith("Y"))
+                    {
+                        check = true;
+                    }
+                    else if (response.ToUpper().StartsWith("N"))
+                    {
+                        Console.WriteLine("Goodbye " + player.name + "!");
+                        removedPlayers.Add(player);
+                        check = true;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Please answer Y(es) or N(o)!");
+                    }
                 }
-                else if (response.ToUpper().StartsWith("N"))
-                {
-                    return false;
-                }
-                else
-                {
-                    Console.WriteLine("Please answer Y(es) or N(o)!");
-                }
+                check = false;
             }
+            return removedPlayers;
         }
     }
 }

@@ -140,19 +140,29 @@ namespace RaceTo21
             }
             else if (nextTask == Task.CheckForNextRound)
             {
-                bool anotherRound = cardTable.AnotherRound();
-                if (anotherRound == true)
+                List<Player> removedPlayers = new List<Player>();
+                removedPlayers = cardTable.AnotherRound(players);
+
+                if (removedPlayers.Count > 0)
+                {
+                    for (int i = 0; i < removedPlayers.Count; i++)
+                    {
+                        players.Remove(removedPlayers[i]);
+                    }
+                }
+                if (players.Count > 1)
                 {
                     ResetRound();
                 }
                 else
                 {
+                    Console.WriteLine("Sorry, not enough players.");
                     nextTask = Task.GameOver;
                 }
             }
             else 
             {
-                Console.WriteLine("I'm sorry, I don't know what to do now!");
+                Console.WriteLine("I'm sorry, I don't know what to do now!"); //Shouldn't get here
                 nextTask = Task.GameOver;
             }
         }
@@ -249,7 +259,7 @@ namespace RaceTo21
             pot = 0;
             currentPlayer = 0;
 
-            nextTask = Task.IntroducePlayers;
+            nextTask = Task.GetBets;
         }
     }
 }
