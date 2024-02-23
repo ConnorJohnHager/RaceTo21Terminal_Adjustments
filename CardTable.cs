@@ -141,7 +141,7 @@ namespace RaceTo21
          * Is called by Game object and ShowHands method
          * Game object provides player
          */
-        public void ShowHand(Player player)
+        private void ShowHand(Player player)
         {
             if (player.cards.Count > 0)
             {
@@ -159,7 +159,7 @@ namespace RaceTo21
                     {
                         isFirst = false;
                     }
-                    Console.Write(card.name);
+                    Console.Write(card.Name);
                 }
                 Console.Write(" = " + player.score + "/21 ");
                 if (player.status != PlayerStatus.active)

@@ -61,7 +61,7 @@ namespace RaceTo21
                         cardLongName += "Diamonds";
                     };
 
-                    cards.Add(new Card { ID = cardName + cardSuit, name = cardLongName });
+                    cards.Add(new Card { ID = cardName + cardSuit, Name = cardLongName });
                 }
             }
         }

@@ -6,16 +6,17 @@ namespace RaceTo21
 {
     public class Game
     {
-        int numberOfPlayers; // number of players in current game
+        private int numberOfPlayers; // number of players in current game
         List<Player> players = new List<Player>(); // list of objects containing player data
         List<Player> removedPlayers = new List<Player>(); // list of players to be removed at end of round
         CardTable cardTable; // object in charge of displaying game information
         Deck deck = new Deck(); // deck of cards
-        int currentPlayer = 0; // current player on list
+        private int currentPlayer = 0; // current player on list
+        private int busted = 0; // counting how many players have busted
+        private int bet; // bet that each player makes for the round
+        private int pot; // total bets for the round to be given to winner
+
         public Task nextTask; // keeps track of game state
-        public int bet; // bet that each player makes for the round
-        public int pot; // total bets for the round to be given to winner
-        public int busted = 0; // counting how many players have busted
 
         public Game(CardTable c)
         {
